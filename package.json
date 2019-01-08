@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.1",
+    "npm": "6.4.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,9 +21,16 @@
   },
   "homepage": "https://github.com/arackaf/jellrolls-songs#readme",
   "dependencies": {
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "del": "^3.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "express-session": "^1.15.6",
+    "generic-persistgraphql": "^0.1.2",
     "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
     "micro-graphql-react": "^0.3.0-beta2",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
