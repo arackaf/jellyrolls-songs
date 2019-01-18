@@ -14,21 +14,62 @@ const client = new Client({
 setDefaultClient(client);
 
 class Main extends Component {
+  state = { title: "" };
+
+  search = evt => {
+    evt.preventDefault();
+    this.setState({ title: this.title.value });
+  };
+
+  render() {
+    let { title } = this.state;
+    return (
+      <div style={{ padding: "5px" }}>
+        <form className="form-inline">
+          <div className="form-group">
+            <input ref={el => (this.title = el)} className="form-control padd-input" id="exampleInputName2" placeholder="Song" />
+            <SingerToggle singer="Michael" onChange={this.singerToggle} />
+            <SingerToggle singer="Matt" onChange={this.singerToggle} />
+            <SingerToggle singer="Rob" onChange={this.singerToggle} />
+            <SingerToggle singer="Jason" onChange={this.singerToggle} />
+            <SingerToggle singer="Ray" onChange={this.singerToggle} />
+            <SingerToggle singer="Scotty" onChange={this.singerToggle} />
+            <SingerToggle singer="Jordan" onChange={this.singerToggle} />
+          </div>
+
+          <button onClick={this.search} className="btn btn-default">
+            Go
+          </button>
+        </form>
+        <br />
+        <GraphQL
+          query={{
+            loadSongs: buildQuery(SONG_QUERY, { title: title || void 0 })
+          }}
+        >
+          {({ loadSongs: { loading, loaded, data, error } }) => (
+            <div>
+              {loading ? <span>Loading...</span> : null}
+              {loaded && data && data.allSongs ? <DisplaySongs songs={data.allSongs.Songs} /> : null}
+              <br />
+            </div>
+          )}
+        </GraphQL>
+      </div>
+    );
+  }
+}
+
+class SingerToggle extends Component {
   render() {
     return (
-      <GraphQL
-        query={{
-          loadSongs: buildQuery(SONG_QUERY, { title: "dr" })
-        }}
-      >
-        {({ loadSongs: { loading, loaded, data, error } }) => (
-          <div>
-            {loading ? <span>Loading...</span> : null}
-            {loaded && data && data.allSongs ? <DisplaySongs songs={data.allSongs.Songs} /> : null}
-            <br />
-          </div>
-        )}
-      </GraphQL>
+      <div className="form-group" style={{ marginRight: "15px" }}>
+        <div className="checkbox" style={{}}>
+          <label>
+            <input onChange={evt => this.props.onChange(evt.target.checked)} type="checkbox" /> {this.props.singer}
+          </label>
+        </div>
+      </div>
     );
   }
 }
@@ -37,7 +78,7 @@ class DisplaySongs extends Component {
   render() {
     let { songs } = this.props;
     return (
-      <div style={{ padding: "5px" }}>
+      <div>
         <table className="table table-condensed table-striped">
           <thead>
             <tr>
