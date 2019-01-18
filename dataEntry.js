@@ -1,6 +1,8 @@
 import connect from "./connect";
 import readXls from "read-excel-file/node";
 
+throw "not used anymore";
+
 const singers = {
   Michael: 0,
   Jordan: 1,
@@ -43,6 +45,9 @@ function processSong(txt, singer) {
   let song = allSongs.has(title) ? allSongs.get(title) : { title, artist, singers: [] };
   if (!song.singers) {
     console.log(txt);
+  }
+  if (!song.singers) {
+    console.log(song.title);
   }
   song.singers.push(singer);
 

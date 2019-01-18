@@ -8,7 +8,9 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "watch": "webpack -w",
+    "persistgraphql": "persistgraphql src"
   },
   "repository": {
     "type": "git",
@@ -21,17 +23,28 @@
   },
   "homepage": "https://github.com/arackaf/jellrolls-songs#readme",
   "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-minify-webpack-plugin": "^0.3.1",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
+    "css-loader": "^2.1.0",
     "del": "^3.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "express-session": "^1.15.6",
+    "file-loader": "^3.0.1",
     "generic-persistgraphql": "^0.1.2",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3",
+    "html-webpack-plugin": "^3.2.0",
     "micro-graphql-react": "^0.3.0-beta2",
+    "mini-css-extract-plugin": "^0.5.0",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "mongo-graphql-starter": "^0.7.3",
@@ -40,6 +53,7 @@
     "react-dom": "^16.7.0",
     "read-excel-file": "^2.0.7",
     "webpack": "^4.28.3",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1"
   }
 }

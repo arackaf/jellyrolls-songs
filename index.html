@@ -5,51 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-
-    <style>
-      tbody > tr:nth-child(even) {
-        background-color: lightblue;
-      }
-    </style>
   </head>
   <body>
-    <table>
-      <thead>
-        <tr>
-          <th>Song</th>
-          <th>Artist</th>
-          <th>Singers</th>
-          <th>Group</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-
-    <script>
-      const query = encodeURIComponent(`{
-        allSongs(SORT:{title:1}){
-          Songs{
-            title
-            artist
-            singers
-            group
-          }
-        }
-      }`);
-      let toAdd = "";
-      fetch(`/graphql/?query=${query}`)
-        .then(resp => resp.json())
-        .then(resp => {
-          resp.data.allSongs.Songs.forEach(song => {
-            toAdd += `<tr><td>${song.title}</td><td>${song.artist}</td><td>${
-              song.group ? "" : song.singers.join(", ")
-            }</td><td>${!!song.group}</td></tr>`;
-          });
-          document.getElementById("tbody").innerHTML = toAdd;
-        })
-        .catch(err => {
-          debugger;
-        });
-    </script>
+    <div id="main"></div>
   </body>
 </html>

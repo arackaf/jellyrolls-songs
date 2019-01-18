@@ -31,7 +31,8 @@ const dbPromise = connectToDb();
 export const root = { db: dbPromise };
 export const executableSchema = makeExecutableSchema({ typeDefs: schema, resolvers });
 
-//middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "./extracted_queries.json") });
+middleware(app, { url: "/graphql", mappingFile: path.resolve(__dirname, "./extracted_queries.json") });
+app.use("/dist/", express.static(__dirname + "/dist/"));
 app.use(
   "/graphql",
   expressGraphql({
@@ -43,7 +44,7 @@ app.use(
 
 app.get("/", browseToMain);
 function browseToMain(request, response) {
-  response.sendFile(path.join(__dirname + "/index.html"));
+  response.sendFile(path.join(__dirname + "/dist/index.html"));
 }
 
 // app.get("/favicon.ico", function(request, response) {
