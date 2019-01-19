@@ -2910,7 +2910,7 @@ select[multiple].input-lg {
   margin-bottom: 10px;
   color: #737373;
 }
-@media (min-width: 768px) {
+@media (min-width: 10px) {
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -2976,7 +2976,7 @@ select[multiple].input-lg {
   margin-right: -15px;
   margin-left: -15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 10px) {
   .form-horizontal .control-label {
     padding-top: 7px;
     margin-bottom: 0;
@@ -2986,13 +2986,13 @@ select[multiple].input-lg {
 .form-horizontal .has-feedback .form-control-feedback {
   right: 15px;
 }
-@media (min-width: 768px) {
+@media (min-width: 10px) {
   .form-horizontal .form-group-lg .control-label {
     padding-top: 14.333333px;
     font-size: 18px;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 10px) {
   .form-horizontal .form-group-sm .control-label {
     padding-top: 6px;
     font-size: 12px;

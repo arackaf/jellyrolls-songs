@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
 
-import "./css/bootstrap/css/bootstrap.min.css";
+import "./css/bootstrap/css/bootstrap.css";
 
 import SONG_QUERY from "./graphql/mainQuery.graphql";
 import { setDefaultClient, Client, GraphQL, buildQuery } from "micro-graphql-react";
@@ -51,20 +51,16 @@ class Main extends Component {
                 <SingerToggle singer="Matt" onChange={this.singerToggle} />
                 <SingerToggle singer="Rob" onChange={this.singerToggle} />
                 <SingerToggle singer="Jason" onChange={this.singerToggle} />
-              </div>
-            </div>
-            <div className="form-inline">
-              <div className="form-group">
                 <SingerToggle singer="Ray" onChange={this.singerToggle} />
                 <SingerToggle singer="Scotty" onChange={this.singerToggle} />
                 <SingerToggle singer="Jordan" onChange={this.singerToggle} />
               </div>
             </div>
             <br />
-            <div className="form-inline" style={{ marginBottom: "5px" }}>
+            <div className="form-inline" style={{ marginTop: "15px" }}>
               <div className="form-group">
                 <input ref={el => (this.title = el)} className="form-control" style={{ width: "150px", marginRight: "5px" }} placeholder="Song" />
-                <SingerToggle singer="Include Group" onChange={this.toggleGroup} />
+                <SingerToggle singer="Group songs" onChange={this.toggleGroup} />
                 <button onClick={this.search} className="btn btn-default">
                   Go
                 </button>
