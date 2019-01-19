@@ -25,9 +25,8 @@ class Main extends Component {
     let { title } = this.state;
     return (
       <div style={{ padding: "5px" }}>
-        <form className="form-inline">
+        <div className="form-inline">
           <div className="form-group">
-            <input ref={el => (this.title = el)} className="form-control padd-input" id="exampleInputName2" placeholder="Song" />
             <SingerToggle singer="Michael" onChange={this.singerToggle} />
             <SingerToggle singer="Matt" onChange={this.singerToggle} />
             <SingerToggle singer="Rob" onChange={this.singerToggle} />
@@ -36,12 +35,17 @@ class Main extends Component {
             <SingerToggle singer="Scotty" onChange={this.singerToggle} />
             <SingerToggle singer="Jordan" onChange={this.singerToggle} />
           </div>
-
-          <button onClick={this.search} className="btn btn-default">
-            Go
-          </button>
-        </form>
+        </div>
         <br />
+        <div className="form-inline" style={{ marginBottom: "5px" }}>
+          <div className="form-group">
+            <input ref={el => (this.title = el)} className="form-control" style={{ width: "200px", marginRight: "5px" }} placeholder="Song" />
+            <SingerToggle singer="Include Group" onChange={this.singerToggle} />
+            <button onClick={this.search} className="btn btn-default">
+              Go
+            </button>
+          </div>
+        </div>
         <GraphQL
           query={{
             loadSongs: buildQuery(SONG_QUERY, { title: title || void 0 })
@@ -63,7 +67,7 @@ class Main extends Component {
 class SingerToggle extends Component {
   render() {
     return (
-      <div className="form-group" style={{ marginRight: "15px" }}>
+      <div className="form-group" style={{ marginRight: "5px" }}>
         <div className="checkbox" style={{}}>
           <label>
             <input onChange={evt => this.props.onChange(evt.target.checked)} type="checkbox" /> {this.props.singer}
