@@ -14,52 +14,69 @@ const client = new Client({
 setDefaultClient(client);
 
 class Main extends Component {
-  state = { title: "" };
+  state = { title: "", singers: [], group: false };
+  singersPendingState = [];
+  groupPending = false;
 
   search = evt => {
     evt.preventDefault();
-    this.setState({ title: this.title.value });
+    this.setState({ title: this.title.value, group: this.groupPending, singers: [...new Set(this.singersPendingState)] });
+  };
+
+  singerToggle = (name, add) => {
+    if (add) {
+      this.singersPendingState.push(name);
+    } else {
+      this.singersPendingState = this.singersPendingState.filter(singer => singer != name);
+    }
+  };
+
+  toggleGroup = (_, add) => {
+    this.groupPending = add;
   };
 
   render() {
-    let { title } = this.state;
+    let { title, singers, group } = this.state;
     return (
-      <div style={{ padding: "5px" }}>
-        <div className="form-inline">
-          <div className="form-group">
-            <SingerToggle singer="Michael" onChange={this.singerToggle} />
-            <SingerToggle singer="Matt" onChange={this.singerToggle} />
-            <SingerToggle singer="Rob" onChange={this.singerToggle} />
-            <SingerToggle singer="Jason" onChange={this.singerToggle} />
-            <SingerToggle singer="Ray" onChange={this.singerToggle} />
-            <SingerToggle singer="Scotty" onChange={this.singerToggle} />
-            <SingerToggle singer="Jordan" onChange={this.singerToggle} />
-          </div>
-        </div>
-        <br />
-        <div className="form-inline" style={{ marginBottom: "5px" }}>
-          <div className="form-group">
-            <input ref={el => (this.title = el)} className="form-control" style={{ width: "200px", marginRight: "5px" }} placeholder="Song" />
-            <SingerToggle singer="Include Group" onChange={this.singerToggle} />
-            <button onClick={this.search} className="btn btn-default">
-              Go
-            </button>
-          </div>
-        </div>
-        <GraphQL
-          query={{
-            loadSongs: buildQuery(SONG_QUERY, { title: title || void 0 })
-          }}
-        >
-          {({ loadSongs: { loading, loaded, data, error } }) => (
+      <GraphQL
+        query={{
+          loadSongs: buildQuery(SONG_QUERY, { title: title || void 0, singers: !group && singers.length ? singers : void 0, group: group || void 0 })
+        }}
+      >
+        {({ loadSongs: { loading, loaded, data, error } }) => (
+          <div style={{ padding: "5px" }}>
+            <div className="form-inline">
+              <div className="form-group">
+                <SingerToggle singer="Michael" onChange={this.singerToggle} />
+                <SingerToggle singer="Matt" onChange={this.singerToggle} />
+                <SingerToggle singer="Rob" onChange={this.singerToggle} />
+                <SingerToggle singer="Jason" onChange={this.singerToggle} />
+              </div>
+            </div>
+            <div className="form-inline">
+              <div className="form-group">
+                <SingerToggle singer="Ray" onChange={this.singerToggle} />
+                <SingerToggle singer="Scotty" onChange={this.singerToggle} />
+                <SingerToggle singer="Jordan" onChange={this.singerToggle} />
+              </div>
+            </div>
+            <br />
+            <div className="form-inline" style={{ marginBottom: "5px" }}>
+              <div className="form-group">
+                <input ref={el => (this.title = el)} className="form-control" style={{ width: "150px", marginRight: "5px" }} placeholder="Song" />
+                <SingerToggle singer="Include Group" onChange={this.toggleGroup} />
+                <button onClick={this.search} className="btn btn-default">
+                  Go
+                </button>
+              </div>
+            </div>
             <div>
-              {loading ? <span>Loading...</span> : null}
               {loaded && data && data.allSongs ? <DisplaySongs songs={data.allSongs.Songs} /> : null}
               <br />
             </div>
-          )}
-        </GraphQL>
-      </div>
+          </div>
+        )}
+      </GraphQL>
     );
   }
 }
@@ -70,7 +87,7 @@ class SingerToggle extends Component {
       <div className="form-group" style={{ marginRight: "5px" }}>
         <div className="checkbox" style={{}}>
           <label>
-            <input onChange={evt => this.props.onChange(evt.target.checked)} type="checkbox" /> {this.props.singer}
+            <input onChange={evt => this.props.onChange(this.props.singer, evt.target.checked)} type="checkbox" /> {this.props.singer}
           </label>
         </div>
       </div>
