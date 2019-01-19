@@ -60,7 +60,7 @@ class Main extends Component {
             <div className="form-inline" style={{ marginTop: "15px" }}>
               <div className="form-group">
                 <input ref={el => (this.title = el)} className="form-control" style={{ width: "150px", marginRight: "5px" }} placeholder="Song" />
-                <SingerToggle singer="Group songs" onChange={this.toggleGroup} />
+                <SingerToggle regularSize={true} singer="Group songs" onChange={this.toggleGroup} />
                 <button onClick={this.search} className="btn btn-default">
                   Go
                 </button>
@@ -81,7 +81,7 @@ class SingerToggle extends Component {
   render() {
     return (
       <div className="form-group" style={{ marginRight: "5px" }}>
-        <div className="checkbox" style={{}}>
+        <div className={`checkbox ${this.props.regularSize ? "" : "checkbox-small"}`} style={{}}>
           <label>
             <input onChange={evt => this.props.onChange(this.props.singer, evt.target.checked)} type="checkbox" /> {this.props.singer}
           </label>
