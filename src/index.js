@@ -100,18 +100,18 @@ class DisplaySongs extends Component {
           <thead>
             <tr>
               <th>Title</th>
-              <th>Artist</th>
               <th>Singers</th>
-              <th>Group</th>
             </tr>
           </thead>
           <tbody>
             {songs.map(song => (
               <tr>
-                <td>{song.title}</td>
-                <td>{song.artist}</td>
-                <td>{song.singers && song.singers.length ? song.singers.join(", ") : ""}</td>
-                <td>{song.group ? "Yes" : ""}</td>
+                <td>
+                  {song.title}
+                  <br />
+                  <i>{song.artist}</i>
+                </td>
+                <td>{song.group ? "Group" : song.singers && song.singers.length ? song.singers.join(", ") : ""}</td>
               </tr>
             ))}
           </tbody>
