@@ -19,7 +19,6 @@ class Main extends Component {
   groupPending = false;
 
   search = evt => {
-    evt.preventDefault();
     this.setState({ title: this.title.value, group: this.groupPending, singers: [...new Set(this.singersPendingState)] });
   };
 
@@ -35,8 +34,16 @@ class Main extends Component {
     this.groupPending = add;
   };
 
+  keyDown = evt => {
+    if (evt.keyCode == 13) {
+      this.search();
+    }
+  };
+
   render() {
     let { title, singers, group } = this.state;
+    title = title.replace(/’/g, "'");
+
     return (
       <GraphQL
         query={{
@@ -59,7 +66,13 @@ class Main extends Component {
             <br />
             <div className="form-inline" style={{ marginTop: "15px" }}>
               <div className="form-group">
-                <input ref={el => (this.title = el)} className="form-control" style={{ width: "150px", marginRight: "5px" }} placeholder="Song" />
+                <input
+                  ref={el => (this.title = el)}
+                  onKeyDown={this.keyDown}
+                  className="form-control"
+                  style={{ width: "150px", marginRight: "5px" }}
+                  placeholder="Song"
+                />
                 <SingerToggle regularSize={true} singer="Group songs" onChange={this.toggleGroup} />
                 <button onClick={this.search} className="btn btn-default">
                   Go
