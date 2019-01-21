@@ -41,13 +41,37 @@ class Main extends Component {
   };
 
   render() {
-    let { title, singers, group } = this.state;
+    let { title, artist, singers, group } = this.state;
     title = title.replace(/’/g, "'");
+
+    let multiArtistRegex = /artist:"(.+)"/;
+    let singleArtistRegex = /artist:(\S+)/;
+
+    let multiArtist = title.match(multiArtistRegex);
+    if (multiArtist) {
+      let [wholeMatch, artistFilter] = multiArtist;
+      artist = artistFilter;
+      title = title.replace(wholeMatch, "");
+    } else {
+      let singleArtist = title.match(singleArtistRegex);
+      if (singleArtist) {
+        let [wholeMatch, artistFilter] = singleArtist;
+        artist = artistFilter;
+        title = title.replace(wholeMatch, "");
+      }
+    }
+
+    title = title.trim();
 
     return (
       <GraphQL
         query={{
-          loadSongs: buildQuery(SONG_QUERY, { title: title || void 0, singers: !group && singers.length ? singers : void 0, group: group || void 0 })
+          loadSongs: buildQuery(SONG_QUERY, {
+            title: title || void 0,
+            singers: !group && singers.length ? singers : void 0,
+            group: group || void 0,
+            artist: artist || void 0
+          })
         }}
       >
         {({ loadSongs: { loading, loaded, data, error } }) => (
@@ -70,10 +94,10 @@ class Main extends Component {
                   ref={el => (this.title = el)}
                   onKeyDown={this.keyDown}
                   className="form-control"
-                  style={{ width: "150px", marginRight: "5px" }}
+                  style={{ width: "200px", marginRight: "5px" }}
                   placeholder="Song"
                 />
-                <SingerToggle regularSize={true} singer="Group songs" onChange={this.toggleGroup} />
+                <SingerToggle regularSize={true} singer="Group?" onChange={this.toggleGroup} />
                 <button onClick={this.search} className="btn btn-default">
                   Go
                 </button>
