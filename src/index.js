@@ -44,8 +44,8 @@ class Main extends Component {
     let { title, artist, singers, group } = this.state;
     title = title.replace(/’/g, "'");
 
-    let multiArtistRegex = /artist:"(.+)"/;
-    let singleArtistRegex = /artist:(\S+)/;
+    let multiArtistRegex = /artist:"(.+)"/i;
+    let singleArtistRegex = /artist:(\S+)/i;
 
     let multiArtist = title.match(multiArtistRegex);
     if (multiArtist) {
