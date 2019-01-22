@@ -45,7 +45,7 @@ class Main extends Component {
     title = title.replace(/’/g, "'");
 
     let multiArtistRegex = /artist:"(.+)"/i;
-    let singleArtistRegex = /artist:\s+(\S+)/i;
+    let singleArtistRegex = /artist:\s*(\S+)/i;
 
     let multiArtist = title.match(multiArtistRegex);
     if (multiArtist) {
