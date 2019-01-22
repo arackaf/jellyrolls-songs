@@ -1,5 +1,5 @@
 query searchSongs($singers: [String], $artist: String, $title: String, $group: Boolean, $group_ne: Boolean) {
-  allSongs(title_contains: $title, singers_containsAny: $singers, artist_contains: $artist, group: $group, group_ne: $group_ne) {
+  allSongs(title_contains: $title, singers_containsAny: $singers, artist_contains: $artist, group: $group, group_ne: $group_ne, SORT: { title: 1 }) {
     Songs {
       _id
       title
