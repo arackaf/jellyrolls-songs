@@ -85,6 +85,8 @@ class Main extends Component {
                 <SingerToggle singer="Ray" onChange={this.singerToggle} />
                 <SingerToggle singer="Scotty" onChange={this.singerToggle} />
                 <SingerToggle singer="Jordan" onChange={this.singerToggle} />
+                <SingerToggle singer="Sunshine" onChange={this.singerToggle} />
+                <SingerToggle singer="Ingrid" onChange={this.singerToggle} />
               </div>
             </div>
             <br />

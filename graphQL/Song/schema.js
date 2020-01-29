@@ -79,7 +79,6 @@ export const type = `
     artist_ne: String
     artist_in: [String]
     group: Boolean
-    group: Boolean
     group_ne: Boolean
     group_in: [Boolean]
     singers_count: Int
