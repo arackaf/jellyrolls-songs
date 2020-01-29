@@ -18,7 +18,8 @@ module.exports = {
   resolve: {
     modules: [path.resolve("./"), path.resolve("./node_modules")]
   },
-  mode: isProd ? "production" : "development",
+  //no clue why this is failing to build in production mode
+  mode: isProd && false ? "production" : "development",
   module: {
     rules: [
       {
