@@ -42,7 +42,7 @@
     "generic-persistgraphql": "^0.1.2",
     "graphql": "^14.0.2",
     "graphql-tools": "^4.0.3",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "micro-graphql-react": "^0.3.0-beta2",
     "mini-css-extract-plugin": "^0.5.0",
     "mobx": "^5.8.0",
@@ -54,6 +54,6 @@
     "read-excel-file": "^2.0.7",
     "webpack": "^4.28.3",
     "webpack-bundle-analyzer": "^3.0.3",
-    "webpack-cli": "^3.2.1"
+    "webpack-cli": "^3.3.12"
   }
 }
